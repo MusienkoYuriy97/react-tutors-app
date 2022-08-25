@@ -5,6 +5,8 @@
     transition: border, box-shadow .3s;
 }
 
+$color: green;
+
 .input {}
 
 .input:active, .input:focus {
@@ -12,7 +14,7 @@
 }
 
 .input.green {
-    border: 1px solid green
+    border: 1px solid $color
 }
 
 .input.red {

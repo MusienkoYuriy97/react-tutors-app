@@ -1,6 +1,6 @@
 import React from "react";
 import Radium from "radium";
-import './Tutor.css';
+import './Tutor.scss';
 
 const Tutor = (props) => {
     const inputClasses = ['input']
