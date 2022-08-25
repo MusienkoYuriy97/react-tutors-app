@@ -25,7 +25,7 @@ class App extends Component {
     handleDelete(index) {
         const tutors = [...this.state.tutors];
         tutors.splice(index, 1);
-        this.setState({tutors});
+        this.setState({ tutors });
     }
 
     toggleTutorsHandler = () => {
@@ -35,36 +35,42 @@ class App extends Component {
     }
 
     render() {
-        const tutors = this.state.tutors;
+        const divStyle = {
+            textAlign: "center",
+            color: "black",
+            fontSize: "15px",
+        }
+
+        let tutors = null;
+        if (this.state.showTutors) {
+            tutors = this.state.tutors.map((tutor, index) => {
+                return (
+                    <Tutor
+                        key={index}
+                        name={tutor.name}
+                        qualification={tutor.qualification}
+                        phoneNumber={tutor.phoneNumber}
+                        onDelete={this.handleDelete.bind(this, index)}
+                        onChangeName={event => this.onChangeName(event.target.value, index)}
+                    />
+                )
+            });
+        }
+
         return (
-            <div style={{
-                textAlign: "center",
-                color: "black",
-                fontSize: "15px",
-            }}>
+            <div style={divStyle}>
                 <div>
                     <h1>{this.state.title}</h1>
-                    <input
-                        type='text'
-                        placeholder='type new title'
-                        onChange={this.handleInput}
-                    />
                     <button
                         onClick={this.toggleTutorsHandler}
                     >Toggle Tutors</button>
                 </div>
-                {this.state.showTutors ? this.state.tutors.map((tutor, index) => {
-                    return (
-                        <Tutor
-                            key={index}
-                            name={tutor.name}
-                            qualification={tutor.qualification}
-                            phoneNumber={tutor.phoneNumber}
-                            onDelete={this.handleDelete.bind(this, index)}
-                            onChangeName={event => this.onChangeName(event.target.value, index)}
-                        />
-                    )
-                }) : null}
+                <div style={{
+                    width: 400,
+                    margin: 'auto',
+                }}>
+                    {tutors}
+                </div>
             </div>
         );
 
