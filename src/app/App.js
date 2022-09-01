@@ -2,10 +2,17 @@ import React, { Component } from "react";
 import Tutor from "../entity/Tutor";
 
 class App extends Component {
-    state = {
-        tutors: [{ name: 'Alina Musienko', phoneNumber: '80297263627', qualification: 'Speech therapist' }, { name: 'Yury Musienko', phoneNumber: '80298344491', qualification: 'Software developer' }, { name: 'Alex Hunter', phoneNumber: '80291111111', qualification: 'Math teacher' }],
-        title: 'Tutors',
-        showTutors: false
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            tutors: [
+                { name: 'Alina Musienko', phoneNumber: '80297263627', qualification: 'Speech therapist' },
+                // { name: 'Yury Musienko', phoneNumber: '80298344491', qualification: 'Software developer' }, 
+                // { name: 'Alex Hunter', phoneNumber: '80291111111', qualification: 'Math teacher'},
+            ],
+            showTutors: false
+        }
     }
 
     onChangeName(name, index) {
@@ -34,7 +41,16 @@ class App extends Component {
         });
     }
 
+    UNSAFE_componentWillMount() {
+        console.log('App componentWillMount');
+    }
+
+    componentDidMount() {
+        console.log('App componentDidMount');
+    }
+
     render() {
+        console.log('App render');
         const divStyle = {
             textAlign: "center",
             color: "black",
@@ -60,7 +76,7 @@ class App extends Component {
         return (
             <div style={divStyle}>
                 <div>
-                    <h1>{this.state.title}</h1>
+                    <h1>{this.props.title}</h1>
                     <button
                         onClick={this.toggleTutorsHandler}
                     >Toggle Tutors</button>
