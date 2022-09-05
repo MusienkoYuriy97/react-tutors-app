@@ -13,19 +13,19 @@ class Tutor extends React.Component {
         return nextProps.name.trim() !== this.props.name.trim();
     }
 
-    componentWillUpdate(nextProps, nextState) {
+    UNSAFE_componentWillUpdat(nextProps, nextState) {
         console.log('Tutor componentWillUpdate', nextProps, nextState);
     }
 
-    static getDerivedStateFromProps(nextProps, prevState) {
-        console.log('Tutor getDerivedStateFromProps', nextProps, prevState);
+    // static getDerivedStateFromProps(nextProps, prevState) {
+    //     console.log('Tutor getDerivedStateFromProps', nextProps, prevState);
 
-        return prevState;
-    }
+    //     return prevState;
+    // }
 
-    getSnapshotBeforeUpdate() {
-        console.log('Tutor getSnapshotBeforeUpdate');
-    }
+    // getSnapshotBeforeUpdate() {
+    //     console.log('Tutor getSnapshotBeforeUpdate');
+    // }
 
     componentDidUpdate() {
         console.log('Tutor componentDidUpdate');
@@ -37,16 +37,20 @@ class Tutor extends React.Component {
 
     render() {
         console.log('Tutur render')
-        const inputClasses = ['input']
+
+        if (Math.random() > 0.7) {
+            throw new Error('Car random failed');
+        }
+        const inputClasses = ['input'];
 
         if (this.props.name !== '') {
-            inputClasses.push('green')
+            inputClasses.push('green');
         } else {
-            inputClasses.push('red')
+            inputClasses.push('red');
         }
 
         if (this.props.name.length > 5) {
-            inputClasses.push('bold')
+            inputClasses.push('bold');
         }
 
         const style = {
@@ -57,7 +61,7 @@ class Tutor extends React.Component {
                 boxShadow: '0 4px 15px 0 rgba(0,0,0, .25)',
                 cursor: 'pointer'
             }
-        }
+        };
 
         return (
             <div className="Tutor" style={style}>

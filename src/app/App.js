@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Tutor from "../entity/Tutor";
+import ErrorBoundary from "../errorboundary/ErrorBoundary";
+import Counter from "../counter/Counter";
 
 class App extends Component {
     constructor(props) {
@@ -61,14 +63,15 @@ class App extends Component {
         if (this.state.showTutors) {
             tutors = this.state.tutors.map((tutor, index) => {
                 return (
-                    <Tutor
-                        key={index}
-                        name={tutor.name}
-                        qualification={tutor.qualification}
-                        phoneNumber={tutor.phoneNumber}
-                        onDelete={this.handleDelete.bind(this, index)}
-                        onChangeName={event => this.onChangeName(event.target.value, index)}
-                    />
+                    <ErrorBoundary key={index}>
+                        <Tutor
+                            name={tutor.name}
+                            qualification={tutor.qualification}
+                            phoneNumber={tutor.phoneNumber}
+                            onDelete={this.handleDelete.bind(this, index)}
+                            onChangeName={event => this.onChangeName(event.target.value, index)}
+                        />
+                    </ErrorBoundary>
                 )
             });
         }
@@ -77,7 +80,9 @@ class App extends Component {
             <div style={divStyle}>
                 <div>
                     <h1>{this.props.title}</h1>
+                    <Counter />
                     <button
+                        style={{marginTop: 10}}
                         onClick={this.toggleTutorsHandler}
                     >Toggle Tutors</button>
                 </div>
