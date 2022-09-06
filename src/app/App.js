@@ -9,9 +9,9 @@ class App extends Component {
 
         this.state = {
             tutors: [
-                { name: 'Alina Musienko', phoneNumber: '80297263627', qualification: 'Speech therapist' },
-                // { name: 'Yury Musienko', phoneNumber: '80298344491', qualification: 'Software developer' }, 
-                // { name: 'Alex Hunter', phoneNumber: '80291111111', qualification: 'Math teacher'},
+                { name: 'Alina Musienko', phoneNumber: 80297263627, qualification: 'Speech therapist' },
+                { name: 'Yury Musienko', phoneNumber: 80298344491, qualification: 'Software developer' },
+                { name: 'Alex Hunter', phoneNumber: 80291111111, qualification: 'Math teacher' },
             ],
             showTutors: false
         }
@@ -43,14 +43,6 @@ class App extends Component {
         });
     }
 
-    UNSAFE_componentWillMount() {
-        console.log('App componentWillMount');
-    }
-
-    componentDidMount() {
-        console.log('App componentDidMount');
-    }
-
     render() {
         console.log('App render');
         const divStyle = {
@@ -65,6 +57,7 @@ class App extends Component {
                 return (
                     <ErrorBoundary key={index}>
                         <Tutor
+                            index={index}
                             name={tutor.name}
                             qualification={tutor.qualification}
                             phoneNumber={tutor.phoneNumber}
@@ -81,8 +74,9 @@ class App extends Component {
                 <div>
                     <h1>{this.props.title}</h1>
                     <Counter />
+                    <hr />
                     <button
-                        style={{marginTop: 10}}
+                        style={{ marginTop: 10 }}
                         onClick={this.toggleTutorsHandler}
                     >Toggle Tutors</button>
                 </div>
