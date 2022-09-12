@@ -3,11 +3,14 @@ import Tutor from "../entity/Tutor";
 import ErrorBoundary from "../errorboundary/ErrorBoundary";
 import Counter from "../counter/Counter";
 
+export const ClickedContext = React.createContext(false);
+
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            clicked: false,
             tutors: [
                 { name: 'Alina Musienko', phoneNumber: 80297263627, qualification: 'Speech therapist' },
                 { name: 'Yury Musienko', phoneNumber: 80298344491, qualification: 'Software developer' },
@@ -73,12 +76,19 @@ class App extends Component {
             <div style={divStyle}>
                 <div>
                     <h1>{this.props.title}</h1>
-                    <Counter />
+                    <ClickedContext.Provider value={this.state.clicked}>
+                        <Counter />
+                    </ClickedContext.Provider>
                     <hr />
                     <button
                         style={{ marginTop: 10 }}
                         onClick={this.toggleTutorsHandler}
                     >Toggle Tutors</button>
+
+                    <button
+                        style={{ marginTop: 10 }}
+                        onClick={() => this.setState({ clicked: true })}
+                    >Change clicked</button>
                 </div>
                 <div style={{
                     width: 400,
